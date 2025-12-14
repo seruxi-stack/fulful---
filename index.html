@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عالم فلفل 🌸</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #1e1f36, #4b4d70);
+    color: #fff;
+  }
+  /* نجوم متحركة */
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+  }
+  @keyframes twinkle { 0% {opacity:0;} 100% {opacity:1;} }
+
+  /* زر الموسيقى */
+  #musicButton {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background: #ff69b4;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  /* زر عن فلفل */
+  #aboutButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: #8a2be2;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  /* شخصيات وحيوانات */
+  .character, .animal, .plant {
+    position: absolute;
+    cursor: pointer;
+  }
+  .floating {
+    animation: float 5s ease-in-out infinite alternate;
+  }
+  @keyframes float {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-20px);}
+  }
+
+  /* نافذة عن فلفل */
+  #aboutPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30,30,50,0.95);
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    max-width: 300px;
+    text-align: center;
+  }
+  #aboutPopup button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #ff69b4;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<!-- نجوم -->
+<script>
+for (let i=0;i<100;i++){
+  const star=document.createElement('div');
+  star.className='star';
+  star.style.top=Math.random()*window.innerHeight+'px';
+  star.style.left=Math.random()*window.innerWidth+'px';
+  star.style.animationDuration=(1+Math.random()*2)+'s';
+  document.body.appendChild(star);
+}
+</script>
+
+<!-- زر الموسيقى -->
+<button id="musicButton">تشغيل الموسيقى</button>
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- زر عن فلفل -->
+<button id="aboutButton">عن فلفل</button>
+<div id="aboutPopup">
+  <p>مرحبا! أنا فلفل 🌸، هذا عالمي المليء بالشخصيات والحيوانات والنباتات.</p>
+  <button onclick="closeAbout()">إغلاق</button>
+</div>
+
+<!-- شخصيات وحيوانات ونباتات -->
+<img src="https://i.ibb.co/6vP0s2M/cat.png" class="animal floating" style="bottom:50px; left:100px; width:50px;">
+<img src="https://i.ibb.co/2N3xW8t/fish.png" class="animal floating" style="bottom:100px; left:200px; width:50px;">
+<img src="https://i.ibb.co/jw7XcXG/plant.png" class="plant floating" style="bottom:20px; left:300px; width:60px;">
+<img src="https://i.ibb.co/ThYtFvJ/character.png" class="character floating" style="bottom:150px; left:400px; width:60px;">
+
+<script>
+const music=document.getElementById('bgMusic');
+const btn=document.getElementById('musicButton');
+btn.onclick=function(){
+  if(music.paused){ music.play(); btn.textContent='إيقاف الموسيقى'; }
+  else{ music.pause(); btn.textContent='تشغيل الموسيقى'; }
+}
+
+// نافذة عن فلفل
+const aboutPopup=document.getElementById('aboutPopup');
+document.getElementById('aboutButton').onclick=function(){ aboutPopup.style.display='block'; }
+function closeAbout(){ aboutPopup.style.display='none'; }
+</script>
+
+</body>
+</html>
